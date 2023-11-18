@@ -35,14 +35,13 @@
     </div>    
 </div>
 
-
-{{-- <div class="card mt-3">
+<div class="card mt-3">
     <div class="card-header">Student List</div>
     <div class="card-body">
-        {{-- @can('create-student')
+        @can('create-student')
             <a href="{{ route('students.create') }}" class="btn btn-success btn-sm my-2"><i class="bi bi-plus-circle"></i> Add New student</a>
-        @endcan --}}
-        {{-- <table class="table table-striped table-bordered">
+        @endcan
+        <table class="table table-striped table-bordered">
             <thead>
                 <tr>
                 <th scope="col">S#</th>
@@ -54,11 +53,14 @@
             </thead>
             <tbody>
                 @forelse ($students as $student)
+                @if ($student->course_id === $course->id)
+                    
+                
                 <tr>
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td>{{ $student->name }}</td>
                     <td>{{ $student->email }}</td>
-                    <td>{{ $student->course->name}}</td>
+                    <td>{{$course->name}}</td>
                     <td>
                         <form action="{{ route('students.destroy', $student->id) }}" method="post">
                             @csrf
@@ -76,6 +78,7 @@
                         </form>
                     </td>
                 </tr>
+                @endif
                 @empty
                     <td colspan="4">
                         <span class="text-danger">
@@ -84,12 +87,12 @@
                     </td>
                 @endforelse
             </tbody>
-        </table> --}}
-         
+        </table>
 
         {{-- {{ $students->links() }} --}}
 
     </div>
 </div>
+
     
 @endsection

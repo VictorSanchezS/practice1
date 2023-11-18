@@ -43,9 +43,7 @@ class RoleSeeder extends Seeder
         ]);
 
         $teacher->givePermissionTo([
-            'create-student',
             'edit-student',
-            'delete-student'
         ]);
 
     }
