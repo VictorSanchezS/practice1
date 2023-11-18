@@ -23,7 +23,8 @@ class StoreStudentRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:250',
-            'email' => 'required|string|email:rfc,dns|max:250|unique:users,email',
+            'email' => 'nullable|string|email:rfc,dns|max:250|unique:users,email',
+            'course' => 'required',
         ];
     }
 }

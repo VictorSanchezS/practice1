@@ -13,6 +13,7 @@
                 <th scope="col">S#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
+                <th scope="col">Enrolled course</th>
                 <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -22,6 +23,7 @@
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td>{{ $student->name }}</td>
                     <td>{{ $student->email }}</td>
+                    <td>{{ $student->course->name}}</td>
                     <td>
                         <form action="{{ route('students.destroy', $student->id) }}" method="post">
                             @csrf
@@ -49,7 +51,7 @@
             </tbody>
         </table>
 
-        {{ $students->links() }}
+        {{-- {{ $students->links() }} --}}
 
     </div>
 </div>

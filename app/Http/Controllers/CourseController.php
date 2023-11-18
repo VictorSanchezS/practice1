@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
+use App\Models\Student;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -56,7 +57,8 @@ class CourseController extends Controller
     public function show(Course $course): View
     {
         return view('courses.show', [
-            'course' => $course
+            'course' => $course,
+            'students' => Student::latest()->paginate(3)
         ]);
     }
 

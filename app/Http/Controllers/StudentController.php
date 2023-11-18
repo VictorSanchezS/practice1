@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\Course;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use Illuminate\View\View;
@@ -28,7 +29,7 @@ class StudentController extends Controller
     public function index(): View
     {
         return view('students.index', [
-            'students' => Student::latest()->paginate(3)
+            'students' => Student::all()
         ]);
     }
 
@@ -37,7 +38,9 @@ class StudentController extends Controller
      */
     public function create(): View
     {
-        return view('students.create');
+        return view('students.create',[
+            'courses' => Course::latest()->paginate(3)
+        ]);
     }
 
     /**
@@ -45,9 +48,17 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request): RedirectResponse
     {
-        Student::create($request->all());
+        //Student::create($request->all());
+        $student = new student();
+        $student->name = $request->input('name');
+        $student->email = $request->input('email');
+        $student->course_id = $request->input('course');
+        
+        $student->save();
+
         return redirect()->route('students.index')
                 ->withSuccess('New student is added successfully.');
+
     }
 
     /**

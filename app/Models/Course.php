@@ -12,4 +12,6 @@ class Course extends Model
         'name',
         'description'
     ];
+
+    protected $table = 'courses';
 }
