@@ -25,7 +25,8 @@ class PermissionSeeder extends Seeder
             'delete-course',
             'create-student',
             'edit-student',
-            'delete-student'
+            'delete-student',
+            'view-course'
          ];
  
           // Looping and Inserting Array's Permissions into Permission Table

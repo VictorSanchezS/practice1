@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+//use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -18,6 +19,10 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    public function course(){
+        return $this->belongsTo(Course::class, 'course_id', 'id');
+    }
 
     protected $fillable = [
         'name',
@@ -44,4 +49,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    
 }
