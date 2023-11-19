@@ -67,18 +67,22 @@ class StudentController extends Controller
     public function show(Student $student): View
     {
         return view('students.show', [
-            'student' => $student
+            'student' => $student,
+            'courses' => Course::all(),
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Student $student): View
+    public function edit($id): View
     {
-        return view('students.edit', [
-            'student' => $student
-        ]);
+        // return view('students.edit', [
+        //     'student' => $student
+        // ]);
+
+        $student = Student::find($id);
+        return view('students.edit',['student' => $student, 'courses' => Course::all()]);
     }
 
     /**
@@ -86,7 +90,19 @@ class StudentController extends Controller
      */
     public function update(UpdateStudentRequest $request, Student $student): RedirectResponse
     {
-        $student->update($request->all());
+        $request->validate([
+            'name' => 'required|string|max:250',
+            'email' => 'required|unique:students,email, ' . $student->id,
+        ]);
+        
+        //$student->update($request->all());
+
+        $student = Student::find($student->id);
+        $student->name = $request->input('name');
+        $student->email = $request->input('email');
+        $student->course_id = $request->input('course');
+        
+        $student->save();
         return redirect()->back()
                 ->withSuccess('Student is updated successfully.');
     }

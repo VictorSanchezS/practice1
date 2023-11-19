@@ -22,8 +22,8 @@ class UpdateStudentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:250',
-            'email' => 'required|string|email:rfc,dns|max:250|unique:users,email',
+            // 'name' => 'required|string|max:250',
+            // 'email' => 'required|string|email:rfc,dns|max:250|unique:students,email,' .$student->id,
         ];
     }
 }
